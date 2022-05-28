@@ -20,10 +20,7 @@ class WebSocket {
         }
 
         this.lastping = Date.now()
-        // axios.get("https://discord.com/api/v8/channels/804449208697356358/messages",{
-        //     headers:{ Authorization: 'Bot NjY2NjczNzE1NjA5ODYyMTQ0.Xh3mSA.xmNP2A-zXxliQXnhCqtv9h0cDOQ', 'Content-Type': 'application/json'},
-        //   w  credentials: 'include',
-        // }).then(req=>console.log(req))
+        
 
         const webs = new ws("wss://gateway.discord.gg/?v=9&encoding=json")
         this.webs = webs
