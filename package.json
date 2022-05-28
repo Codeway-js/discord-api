@@ -1,0 +1,20 @@
+{
+  "name": "smalldiscordapi",
+  "version": "1.1.1",
+  "description": "it's a small discord api in JS (foxcord is better)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "discord",
+    "discordapi"
+  ],
+  "author": "Codeway",
+  "license": "ISC",
+  "dependencies": {
+    "@stdlib/string-percent-encode": "^0.0.7",
+    "axios": "^0.24.0",
+    "ws": "^8.2.3"
+  }
+}
