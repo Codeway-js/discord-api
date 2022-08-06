@@ -22,6 +22,8 @@ module.exports = class Client extends eventmodule {
             this.readyTimestamp = Date.now()
         })
         this.uptime = this._getuptime()
+        // reqmanager('https://discord.com/api/v9/users/@me/guilds',token,{},{method:"get"})
+        // this.guilds.cache 
         reqmanager('https://discord.com/api/v9/users/@me',token,{},{method:"get"}).then(data=>{
             this.user = new User(data, token)
         })

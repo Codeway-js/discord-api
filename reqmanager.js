@@ -12,8 +12,8 @@ module.exports = async function (urlgive, token, data, option) {
     }
     if (option.method != "get" && option.method != "delete" && !option.callback) {
         axiosoption.data = data
-        console.log(axiosoption)
-        axios(axiosoption)
+        // console.log(axiosoption)
+        return axios(axiosoption)
     }
     else {
         return await axios(axiosoption)

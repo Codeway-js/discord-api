@@ -3,6 +3,7 @@ const restmanager = require("../reqmanager")
 const reqfilemanager = require("../reqfilemanager")
 module.exports = class Channel{
     constructor(data,token,guildid){
+        if(typeof data =="object"){
         this.id = data.id
         this.name = data.name
         this.guildid = data.guild_id
@@ -20,18 +21,22 @@ module.exports = class Channel{
         this.member_count = data.member_count
         this.permission = data.permission
         this.type = data.type 
+        }else {
+            this.id = data
+        }
         this.token = token
 
     }
     send(message, option){
         if(!message) throw new Error('Message not provied')
-        const payload = {
+        let payload = {
             content: '',
             embeds: [],
             components: [],
         };
-        if(message instanceof messageAttachment){
-            return reqfilemanager("https://discord.com/api/v9/channels/"+this.id+"/messages",this.token, payload, message.file, message.name)
+        if(option instanceof messageAttachment){
+            payload = message
+            return reqfilemanager("https://discord.com/api/v9/channels/"+this.id+"/messages",this.token, payload, option.file, option.name)
         }
         switch(typeof message){
             case 'string':
@@ -47,8 +52,6 @@ module.exports = class Channel{
                 catch(err){
                     throw new Error('Invalid Embeds')
                 }
-            default:
-                console.log(typeof message)
         }
         if(option.embeds){
             payload.embeds.push(option.embeds)
@@ -59,7 +62,6 @@ module.exports = class Channel{
         if(option.attachment instanceof messageAttachment){
             reqfilemanager("https://discord.com/api/v9/channels/"+this.id+"/messages",this.token, payload, option.attachment.file, option.attachment.name)
         }
-        console.log(payload)
         restmanager("https://discord.com/api/v10/channels/"+this.id+"/messages",this.token,payload,{method:"post"})
 
 
