@@ -49,3 +49,4 @@ Collection.prototype.findKey = function (condition){
     let arr = this.keyArray()
     return arr.find()
 }
+module.exports = Collection

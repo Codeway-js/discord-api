@@ -28,21 +28,21 @@ class WebSocket {
             this.online = true
         })
         webs.on("message", msg => {
-            console.log(msg)
+            // console.log(msg)
             let rresult
             try {
                 rresult = JSON.parse(msg)
             } catch {
-                return console.log("buffer")
+                return /*console.log("buffer")*/
             }
-            console.log(rresult)
+            // console.log(rresult)
             if (rresult.s) {
                 this.heardbeat.last = rresult.s
             }
             // {op:10,d:{hearbeat_interval: 40000}}
             if (rresult.op === 10) {
                 let obj = {
-                    intents: 65534,
+                    intents: 65535,
                     token: token,
                     compress: true,
                     large_threshold: 350,
@@ -70,7 +70,7 @@ class WebSocket {
             }
         })
 
-        webs.on("error", err => console.log(err))
+        webs.on("error", err => console.error(err))
         webs.on('close', cd => console.log(cd))
         webs.on("pong", () => {
             return Date.now() - this.heardbeat.lastping
@@ -85,15 +85,28 @@ class WebSocket {
             console.log(message.d.mentions[0])
 
         }
+        console.log(message)
         switch (message.t) {
+            
+            case "READY" :{
+                console.log(message+"READY")
+                break
+            }
             case "MESSAGE_CREATE":
                 this.clientthis.emit("message", new Message(message.d, this.token, this.clientthis))
                 break
+            case "MESSAGE_DELETE":
+                this.clientthis.emit("messageDelete", new Message(message.d, this.token, this.clientthis))
+                break
             case "CHANNEL_CREATE":
                 this.clientthis.emit("channel_create", new Channel(message.d, this.token, this.clientthis))
-
+                break
             case 'MESSAGE_REACTION_ADD':
                 this.clientthis.emit('messageRecationAdd', new reaction(message.d, this.token, this.clientthis))
+                break
+            case 'MESSAGE_REACTION_REMOVE':
+                this.clientthis.emit('messageRecationRemove', new reaction(message.d, this.token, this.clientthis))
+                break                                                                           
             case "INTERACTION_CREATE":
                 this.clientthis.emit('interactionCreate', new interaction(message.d,this.token,this.clientthis))
                 

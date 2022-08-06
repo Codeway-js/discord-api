@@ -1,11 +1,13 @@
 const Role = require("./Role")
+const Collection = require("./Collection")
 const restmanager = require("../reqmanager")
 module.exports = class Roles {
     constructor(data, token,guid_id){
        this.token = token
        this.guild_id = guid_id
+       this.cache = new Collection()
        data.forEach(element => {
-        this[element.id] = new Role(element,token,guid_id)           
+        this.cache.set(element.id, new Role(element,token,guid_id))
     });
     }
     async getbyid(id){
