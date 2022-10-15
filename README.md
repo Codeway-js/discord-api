@@ -1,8 +1,11 @@
-# smalldiscord api
-## context
-It's another api who is writing for old v12 discord.js bot work on the v9. Now the code it's working but not finishthe main functionality are on but not all. when I wild finish to implemant all functionality I wild implemant a way to have /comamnds on the library  
-It is on V9 and don't support /commands
-## docs
-for doc look at discord.js docs
-## insall
+# SmallDiscord API
+
+## Context
+
+That's another discordjs API wrote with the V12 and V9 syntax. The current code work, but the project is not finish, for now there's just have the core functionality. When all the basics features of V12 and V9 gonna be implemented, I'm gonna add the slash commands in this API.
+
+## Docs
+For doc look at discord.js v12 docs
+
+## Install
 `npm i smalldiscordapi`
